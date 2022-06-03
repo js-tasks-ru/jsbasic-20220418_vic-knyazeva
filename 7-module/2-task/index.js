@@ -7,6 +7,10 @@ export default class Modal {
     closeButton.addEventListener('click', () => this.close());
   }
 
+  get elem() {
+    return this._elem;
+  }
+
   setTitle(titleString) {
     const modalTitle = this._elem.querySelector('.modal__title');
     modalTitle.textContent = titleString;
@@ -42,9 +46,10 @@ export default class Modal {
 
     const body = document.body;
     document.removeEventListener('keydown', this.kbdHandler);
-    body.removeChild(this._elem);
     body.classList.remove('is-modal-open');
 
+    this._elem.remove();
+    
     const modalTitle = this._elem.querySelector('.modal__title');
     modalTitle.textContent = '';
 
